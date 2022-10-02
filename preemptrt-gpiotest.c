@@ -1,5 +1,7 @@
 //This code is from Maxime Chevallier of bootlin
 //during preempt-rt training, it was used as a test program to see the latency on a gpio using oscilloscope
+//usage example: ./preemptrt-gpiotest gpiochip0 28 gpiochip0 17 h p
+// gpiochipX and pin number map can be found by invoking gpioinfo command on the target board
 #include <gpiod.h>
 #include <stdio.h>
 #include <unistd.h>
@@ -76,7 +78,7 @@ int main(int argc, char **argv)
 
 	output_line = gpiod_chip_get_line(output_chip, output_line_num);
 	if (!output_line) {
-		perror("Get input line failed\n");
+		perror("Get output line failed\n");
 		ret = -1;
 		goto close_chip;
 	}
